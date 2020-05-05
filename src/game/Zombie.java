@@ -18,7 +18,7 @@ package game;
  *       is not null and there is a broken leg, then return doNothing
  *       action if it is. 
  *       
- *       before any move, check if losing both limb to that it will drop 
+ *       before any move, check if losing both limb so that it will drop 
  *       its weapon
  *       
  *       check for broken leg oso

@@ -7,10 +7,10 @@ import edu.monash.fit2099.engine.WeaponItem;
  *
  * A weapon made from zombie fallen limb
  */
-public class WeaponLimb extends WeaponItem {
+public class ZombieHand extends WeaponItem {
 
-	public WeaponLimb() {
-		super("Limb", '{', 15, "swing");
+	public ZombieHand() {
+		super("ZombieHand", 'H', 15, "swing");
 		// TODO Auto-generated constructor stub
 	}
 

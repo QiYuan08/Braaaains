@@ -44,7 +44,7 @@ public class AttackBehaviour implements Behaviour {
 		Collections.shuffle(exits);
 		
 		for (Exit e: exits) {
-			if (!(e.getDestination().containsAnActor()))
+			if (!(e.getDestination().containsAnActor()))  //if no action do nothing
 				continue;
 			if (e.getDestination().getActor().hasCapability(attackableTeam)) {
 				return new AttackAction(e.getDestination().getActor());
