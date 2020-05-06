@@ -37,7 +37,7 @@ public class AttackAction extends Action {
 
 		Weapon weapon = actor.getWeapon();
 
-		if (rand.nextBoolean()) {
+		if (rand.nextBoolean()) {  // randomly let the actor miss his target
 			return actor + " misses " + target + ".";
 		}
 

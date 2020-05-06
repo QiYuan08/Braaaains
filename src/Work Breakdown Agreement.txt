@@ -1,0 +1,53 @@
+Work Breakdown Agreement
+
+-- this text file is created to show the work break down for assignment --
+
+Teh Qi Yuan is responsible for:
+• Zombies should be able to bite. Give the Zombie a bite attack as well, with a 50% probability of
+  using this instead of their normal attack. The bite attack should have a lower chance of hitting
+  than the punch attack, but do more damage – experiment with combinations of hit probability and
+  damage that make the game fun and challenging. (You can experiment with the bite probability
+  too, if you like.)
+• A successful bite attack restores 5 health points to the Zombie
+• If there is a weapon at the Zombie’s location when its turn starts, the Zombie should pick it up.
+  This means that the Zombie will use that weapon instead of its intrinsic punch attack (e.g. it might
+  “slash” or “hit” depending on the weapon)
+• Every turn, each Zombie should have a 10% chance of saying “Braaaaains” (or something similarly Zombie-like)
+  Beating up the Zombies
+  Zombies are well-known to fall to pieces quite readily due to decay, but keep on going regardless.
+• Any attack on a Zombie that causes damage has a chance to knock at least one of its limbs off (I
+  suggest 25% but feel free to experiment with the probabilities to make it more fun)
+• On creation, a Zombie has two arms and two legs. It cannot lose more than these.
+• If a Zombie loses one arm, its probability of punching (rather than biting) is halved and it has a
+  50% chance of dropping any weapon it is holding. If it loses both arms, it definitely drops any
+  weapon it was holding.
+• If it loses one leg, its movement speed is halved – that is, it can only move every second turn,
+  although it can still perform other actions such as biting and punching (assuming it’s still got at
+  least one arm)
+• If it loses both legs, it cannot move at all, although it can still bite and punch
+• Lost limbs drop to the ground, either at the Zombie’s location or at an adjacent location (whichever
+  you feel is more fun and interesting)
+• Cast-off Zombie limbs can be wielded as simple clubs – you decide on the amount of damage they
+  can do
+
+Fong Zhong Kern is responsible for:
+• If the player is holding a Zombie arm, they can craft it into a Zombie club, which does significantly
+more damage.
+• If the player is holding a Zombie leg, they can craft it into a Zombie mace, which does even more
+  damage
+• As everybody knows, if you’re killed by a Zombie, you become a Zombie yourself. After a Human is
+  killed, and its corpse should rise from the dead as a Zombie 5-10 turns later 
+
+You must create a new kind of Human: Farmers. A Farmer shares the same characteristics and abilities
+as a Human, but:
+• when standing next to a patch of dirt, a Farmer has a 33% probability of sowing a crop on it
+• left alone, a crop will ripen in 20 turns
+• when standing on an unripe crop, a Farmer can fertilize it, decreasing the time left to ripen by 10
+  turns
+• when standing on or next to a ripe crop, a Farmer (or the player) can harvest it for food. If a
+  Farmer harvests the food, it is dropped to the ground. If the player harvests the food, it is placed
+  in the player’s inventory
+• Food can be eaten by the player, or by damaged humans, to recover some health points
+
+I accept this WBA -Fong Zhong Kern
+I accept this WBA - Teh Qi Yuan

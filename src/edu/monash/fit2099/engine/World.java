@@ -64,15 +64,15 @@ public class World {
 		if (player == null)
 			throw new IllegalStateException();
 
-		// initialize the last action map to nothing actions;
+		// initialize the last action map to nothing actions (1st round);
 		for (Actor actor : actorLocations) {
 			lastActionMap.put(actor, new DoNothingAction());
 		}
 
 		// This loop is basically the whole game
 		while (stillRunning()) {
-			GameMap playersMap = actorLocations.locationOf(player).map();
-			playersMap.draw(display);
+			GameMap playersMap = actorLocations.locationOf(player).map(); // get the map where the player is in
+			playersMap.draw(display);                                     // draw the map on console
 
 			// Process all the actors.
 			for (Actor actor : actorLocations) {
@@ -108,21 +108,24 @@ public class World {
 		GameMap map = here.map();
 
 		Actions actions = new Actions();
+		
+		// get action for every item in inventory
 		for (Item item : actor.getInventory()) {
 			actions.add(item.getAllowableActions());
 			// Game rule. If you're carrying it, you can drop it.
 			actions.add(item.getDropAction());
 		}
-
+		
+		
 		for (Exit exit : here.getExits()) {
 			Location destination = exit.getDestination();
 
 			// Game rule. You don't get to interact with the ground if someone is standing
 			// on it.
-			if (actorLocations.isAnActorAt(destination)) {
-				actions.add(actorLocations.getActorAt(destination).getAllowableActions(actor, exit.getName(), map));
+			if (actorLocations.isAnActorAt(destination)) {                                           // if there is another actor
+				actions.add(actorLocations.getActorAt(destination).getAllowableActions(actor, exit.getName(), map));  // get action to interact with it
 			} else {
-				actions.add(destination.getGround().allowableActions(actor, destination, exit.getName()));
+				actions.add(destination.getGround().allowableActions(actor, destination, exit.getName()));    // else, return an empty actions list ??
 			}
 			actions.add(destination.getMoveAction(actor, exit.getName(), exit.getHotKey()));
 		}
