@@ -14,6 +14,9 @@ import edu.monash.fit2099.engine.GameMap;
  * next to an Actor that they can attack.
  * 
  * @author ram
+ * 
+ * TODO: check condition to see if the actor is zombie in geAction
+ * 		 if yes return ZombieAttackAction instead of AttackAction
  *
  */
 public class AttackBehaviour implements Behaviour {
@@ -44,7 +47,7 @@ public class AttackBehaviour implements Behaviour {
 		Collections.shuffle(exits);
 		
 		for (Exit e: exits) {
-			if (!(e.getDestination().containsAnActor()))  //if no action do nothing
+			if (!(e.getDestination().containsAnActor()))  //if no actor do nothing
 				continue;
 			if (e.getDestination().getActor().hasCapability(attackableTeam)) {
 				return new AttackAction(e.getDestination().getActor());

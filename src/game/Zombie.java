@@ -4,22 +4,19 @@ package game;
  *		 then heal using heal function
  * 
  * playTurn()
- * TODO: modify the for loop so that zombies will pick up item
- *       if attackbehaviour.getaction is null, look for weapon, if no weapon only roam
+ * TODO: check for item in the location then
+ *       pickup item from the actions list @ (actions[size - 1])
+ *       cuz if there is an item, the pickup action is always at same position
+ * 
  * TODO: can add probability to say "BRAINNNSS" here too ?
  * 
- * TODO: add number of limbs at the constructor of each zombie
- *       and decrease them when needed
  *       
- * TODO: override the hurt function to have the probability of broken limb
+ * TODO: override the hurt function to have the probability of broken limb and dropping weapon
  * 
  * plyTurn()
  * TODO: add a if statement before the for loop to check if lastAction
  *       is not null and there is a broken leg, then return doNothing
  *       action if it is. 
- *       
- *       before any move, check if losing both limb so that it will drop 
- *       its weapon
  *       
  *       check for broken leg oso
  * 
@@ -68,6 +65,11 @@ public class Zombie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+//		System.out.println("!!!" + actions.get(actions.size() - 2).menuDescription(this));
+//		for (Action a: actions) {
+//		
+//			System.out.println("! " + a.menuDescription(this));
+//		}
 		for (Behaviour behaviour : behaviours) {
 			Action action = behaviour.getAction(this, map);
 			if (action != null)

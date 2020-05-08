@@ -125,7 +125,7 @@ public class World {
 			if (actorLocations.isAnActorAt(destination)) {                                           // if there is another actor
 				actions.add(actorLocations.getActorAt(destination).getAllowableActions(actor, exit.getName(), map));  // get action to interact with it
 			} else {
-				actions.add(destination.getGround().allowableActions(actor, destination, exit.getName()));    // else, return an empty actions list ??
+				actions.add(destination.getGround().allowableActions(actor, destination, exit.getName()));    // else, return an action to interact with ground
 			}
 			actions.add(destination.getMoveAction(actor, exit.getName(), exit.getHotKey()));
 		}

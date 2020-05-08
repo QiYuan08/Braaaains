@@ -13,7 +13,7 @@ public abstract class Item implements ItemInterface, Printable, Capable {
 	protected boolean portable;
 	protected String name;
 	protected char displayChar;
-	protected Actions allowableActions;
+	protected Actions allowableActions;  // I think is for when an actor is wielding this weapon, get the allowable action
 	protected Capabilities capabilities = new Capabilities();
 
 	/***

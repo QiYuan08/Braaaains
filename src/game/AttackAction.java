@@ -41,7 +41,7 @@ public class AttackAction extends Action {
 			return actor + " misses " + target + ".";
 		}
 
-		int damage = weapon.damage();
+		int damage = weapon.damage();      // automatically return intrinsic weapon if actor no weapon
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
 		target.hurt(damage);
