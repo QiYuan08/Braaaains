@@ -35,13 +35,13 @@ public class AttackAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
-		Weapon weapon = actor.getWeapon();
+		Weapon weapon = actor.getWeapon(); // automatically return intrinsic weapon if actor no weapon
 
 		if (rand.nextBoolean()) {  // randomly let the actor miss his target
 			return actor + " misses " + target + ".";
 		}
 
-		int damage = weapon.damage();      // automatically return intrinsic weapon if actor no weapon
+		int damage = weapon.damage();      
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
 		target.hurt(damage);

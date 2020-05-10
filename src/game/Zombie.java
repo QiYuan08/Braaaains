@@ -19,6 +19,11 @@ package game;
  *       action if it is. 
  *       
  *       check for broken leg oso
+ *
+ * breaking Limb
+ * TODO: call a method in Limb to see whether to  break the limb or not
+ * 		 also check if no. of broken limb exceed 2
+ * 
  * 
  */
 
