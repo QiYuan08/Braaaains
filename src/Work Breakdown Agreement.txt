@@ -29,12 +29,12 @@ Teh Qi Yuan is responsible for:
   you feel is more fun and interesting)
 • Cast-off Zombie limbs can be wielded as simple clubs – you decide on the amount of damage they
   can do
-
-Fong Zhong Kern is responsible for:
 • If the player is holding a Zombie arm, they can craft it into a Zombie club, which does significantly
 more damage.
 • If the player is holding a Zombie leg, they can craft it into a Zombie mace, which does even more
   damage
+
+Fong Zhong Kern is responsible for:
 • As everybody knows, if you’re killed by a Zombie, you become a Zombie yourself. After a Human is
   killed, and its corpse should rise from the dead as a Zombie 5-10 turns later 
 
