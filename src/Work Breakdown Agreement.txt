@@ -30,7 +30,7 @@ Teh Qi Yuan is responsible for:
 • Cast-off Zombie limbs can be wielded as simple clubs – you decide on the amount of damage they
   can do
 • If the player is holding a Zombie arm, they can craft it into a Zombie club, which does significantly
-more damage.
+  more damage.
 • If the player is holding a Zombie leg, they can craft it into a Zombie mace, which does even more
   damage
 

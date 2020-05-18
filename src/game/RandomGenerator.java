@@ -4,6 +4,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -16,11 +17,8 @@ import java.util.Random;
  * 		[a,a,a,a,b,b] hence, it will have 50%  bias towards a 
  *
  */
-public class BiasRandomGenerator {
-	
-	private ArrayList<Integer> itemList;
-	private int bias;
-	
+public class RandomGenerator {
+		
 	private int count(ArrayList<Integer> itemList, Integer item ) {
 		
 		int count = 0;
@@ -119,6 +117,57 @@ public class BiasRandomGenerator {
 		
 		int ans = new Random().nextInt(newList.size());
 		return newList.get(ans);
+	}
+	
+	/**
+	 *  This method is used to return an choices in the form of integer
+	 *  starting from 0 to (N - 1) number of choices. 
+	 *  
+	 * @exception IllegalArgumentException if the sum of probability given is not 100 
+	 * @param probability The probability of each event in integer
+	 * @return The index of the event based on the probability list given
+	 * 
+	 */
+	
+	// TODO can refactor to require only prob( number of choice, probability list)
+	// cuz the choice is the same as index in probability
+	public int probRandom(int[] probability) {
+		
+		int choiceIndex = 0; 
+		int sum = 0;
+		ArrayList<Integer> clonedList = new ArrayList<Integer>();
+		clonedList = cloneArray(probability);
+		
+		for(Integer element: probability) {
+			sum += element;
+		}
+		if(sum != 100) {
+			throw new IllegalArgumentException("Sum of proability must be 100");
+		}
+		
+		clonedList.add(0, 1);
+		int randNum = new Random().nextInt(99);
+		for(int i=0 ;i < clonedList.size()-1; i++) {
+
+			if(randNum >= (clonedList.get(i) - 1) & randNum < (clonedList.get(i) - 1 + clonedList.get(i+1) - 1)) {
+				return choiceIndex = i;
+			}
+			else if( randNum >= (100 - clonedList.get(clonedList.size()-1) - 1)  & randNum < 100) {
+				return choiceIndex = probability.length - 1;
+			}
+		}
+
+		return choiceIndex;
+	}
+	
+	private ArrayList<Integer> cloneArray(int[] original) {
+		
+		ArrayList<Integer> clonedArray = new ArrayList<Integer>();
+		for(Integer item: original) {
+			clonedArray.add(new Integer(item));
+		}
+
+		return clonedArray;
 	}
 	
 	

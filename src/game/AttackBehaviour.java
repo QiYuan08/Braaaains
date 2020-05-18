@@ -50,7 +50,12 @@ public class AttackBehaviour implements Behaviour {
 			if (!(e.getDestination().containsAnActor()))  //if no actor do nothing
 				continue;
 			if (e.getDestination().getActor().hasCapability(attackableTeam)) {
-				return new AttackAction(e.getDestination().getActor());
+				if(actor.hasCapability(ZombieCapability.UNDEAD)) {  // if its zombie use zombie attack action
+					return new ZombieAttackAction(e.getDestination().getActor());
+				}
+				else {
+					return new AttackAction(e.getDestination().getActor());
+				}
 			}
 		}
 		return null;

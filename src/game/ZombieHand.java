@@ -1,5 +1,8 @@
 package game;
 
+import java.util.List;
+
+import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.WeaponItem;
 
 /**
@@ -9,9 +12,12 @@ import edu.monash.fit2099.engine.WeaponItem;
  */
 public class ZombieHand extends WeaponItem {
 
+	/**
+	 * Constructor
+	 * 
+	 * Added a craft action into the allowableActions for every zombie limb
+	 */
 	public ZombieHand() {
-		super("ZombieHand", 'H', 15, "swing");
-		// TODO Auto-generated constructor stub
+		super("ZombieHand", '%', 15, "swing");
 	}
-
 }

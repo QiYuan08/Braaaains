@@ -3,6 +3,9 @@
  */
 package game;
 
+import java.util.List;
+
+import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.WeaponItem;
 
 /**
@@ -12,10 +15,6 @@ import edu.monash.fit2099.engine.WeaponItem;
 public class ZombieLeg extends WeaponItem {
 
 	public ZombieLeg() {
-		super("ZombieLeg", 'L', 11, "swing");
-
-		// TODO Auto-generated constructor stub
+		super("ZombieLeg", '|', 11, "swing");
 	}
-	
-
 }

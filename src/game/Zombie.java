@@ -27,14 +27,19 @@ package game;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
+import edu.monash.fit2099.engine.ActorLocations;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
+import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.engine.MoveActorAction;
+import edu.monash.fit2099.engine.PickUpItemAction;
 
 /**
  * A Zombie.
@@ -45,12 +50,15 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
  *
  */
 public class Zombie extends ZombieActor {
+	
+	private Display display;
 	private Behaviour[] behaviours = {
 			new AttackBehaviour(ZombieCapability.ALIVE), // zombies are only allowed to attack human (i.e ZombieCapability.ALIVE)
 			new HuntBehaviour(Human.class, 10),          // HuntBehaviour(target, range to look for target)
 			new WanderBehaviour()
 	};
-
+	private ZombieLimb limb = new ZombieLimb();
+	
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
 	}
@@ -69,10 +77,25 @@ public class Zombie extends ZombieActor {
 			return punch;
 		}
 	}
+	
+	/**
+	 * Decrease the health of the zombie by 
+	 * 'points' amount and will have probability
+	 * of casting off a limb when getting hurt
+	 * 
+	 */
+	@Override
+	public void hurt(int points) {
+		hitPoints -= points;
+		
+		limb.castLimb(this);
+	}
 
 	/**
 	 * If a Zombie can attack, it will.  If not, it will chase any human within 10 spaces.  
 	 * If no humans are close enough it will wander randomly.
+	 * Have 10 percent chance of saying 'Braiinnns' every turn
+	 * 
 	 * 
 	 * @param actions list of possible Actions
 	 * @param lastAction previous Action, if it was a multiturn action
@@ -87,10 +110,34 @@ public class Zombie extends ZombieActor {
 //		
 //			System.out.println("! " + a.menuDescription(this));
 //		}
+		RandomGenerator rand = new RandomGenerator();
+		try {
+			int[] probability = {10,90};
+			int choiceIndex = rand.probRandom(probability);
+			if(choiceIndex == 0) {
+				display.println(name + "says Braaaaaaaains");
+			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		
+		// if there is item at zombie location pick it up
+		if(actions.get(actions.size() -2) instanceof PickUpItemAction) {
+			if(this.getInventory().size() < 2) {          // zombie are only allowed to hold one weapon
+				return actions.get(actions.size() -2);
+			}
+		}
+		
 		for (Behaviour behaviour : behaviours) {
 			Action action = behaviour.getAction(this, map);
 			if (action != null)
-				return action;
+				if (action instanceof MoveActorAction){
+					if(limb.canMove() == true) {
+						return action;
+					}
+				}else {
+					continue;
+				}
 		}
 		return new DoNothingAction();	
 	}	
