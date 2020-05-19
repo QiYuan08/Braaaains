@@ -40,6 +40,14 @@ public class ZombieLimb {
 		this.leg  = 2;
 		this.moveCounter = 0;
 	}
+	/**
+	 *  Setter to retrieve the number of hand
+	 *  left for this zombie
+	 * @return The number of hand left
+	 */
+	public int hand() {
+		return this.hand;
+	}
 
 	/**
 	 * Method to calculate the determine whether a limb will 

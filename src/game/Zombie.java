@@ -51,6 +51,7 @@ public class Zombie extends ZombieActor {
 	
 	private Display display;
 	private ZombieLimb limb = new ZombieLimb();
+	RandomGenerator myRand = new RandomGenerator();
 	private boolean cutLimb = false;
 	private Behaviour[] behaviours = {
 			new AttackBehaviour(ZombieCapability.ALIVE), // zombies are only allowed to attack human (i.e ZombieCapability.ALIVE)
@@ -65,6 +66,8 @@ public class Zombie extends ZombieActor {
 	/**
 	 * Have a probability of biting instead of punches when
 	 * the zombie have no weapon
+	 * If a zombie is left with one hand probability of biting is higher
+	 * currently the probability of biting is 70% when loses one hand
 	 * 
 	 */
 	@Override
@@ -72,8 +75,15 @@ public class Zombie extends ZombieActor {
 		
 		IntrinsicWeapon bite = new IntrinsicWeapon(15, "bites");
 		IntrinsicWeapon punch = new IntrinsicWeapon(10, "punches");
+		int att = 0;
 		
-		int att = new Random().nextInt(2);
+		if(this.limb.hand() == 1) {
+			int[] probability = {70, 30};
+			att = myRand.probRandom(probability);
+		}
+		else {
+			att = new Random().nextInt(2);
+		}
 		if(att == 1) {
 			return bite;
 		}
@@ -113,7 +123,6 @@ public class Zombie extends ZombieActor {
 //		
 //			System.out.println("! " + a.menuDescription(this));
 //		}
-		RandomGenerator myRand = new RandomGenerator();
 
 		if(cutLimb == true) {
 			limb.castLimb(this, map);
