@@ -42,34 +42,38 @@ import edu.monash.fit2099.engine.MoveActorAction;
 import edu.monash.fit2099.engine.PickUpItemAction;
 
 /**
- * A Zombie.
+ * A class to create a zombie in the game.
  * 
- * This Zombie is pretty boring.  It needs to be made more interesting.
- * 
- * @author ram
+ * @author Teh Qi Yuan, ram
  *
  */
 public class Zombie extends ZombieActor {
 	
 	private Display display;
+	private ZombieLimb limb = new ZombieLimb();
+	private boolean cutLimb = false;
 	private Behaviour[] behaviours = {
 			new AttackBehaviour(ZombieCapability.ALIVE), // zombies are only allowed to attack human (i.e ZombieCapability.ALIVE)
 			new HuntBehaviour(Human.class, 10),          // HuntBehaviour(target, range to look for target)
 			new WanderBehaviour()
 	};
-	private ZombieLimb limb = new ZombieLimb();
 	
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
 	}
 	
+	/**
+	 * Have a probability of biting instead of punches when
+	 * the zombie have no weapon
+	 * 
+	 */
 	@Override
 	public IntrinsicWeapon getIntrinsicWeapon() {
 		
 		IntrinsicWeapon bite = new IntrinsicWeapon(15, "bites");
 		IntrinsicWeapon punch = new IntrinsicWeapon(10, "punches");
 		
-		int att = new Random().nextInt(1);
+		int att = new Random().nextInt(2);
 		if(att == 1) {
 			return bite;
 		}
@@ -80,22 +84,21 @@ public class Zombie extends ZombieActor {
 	
 	/**
 	 * Decrease the health of the zombie by 
-	 * 'points' amount and will have probability
-	 * of casting off a limb when getting hurt
-	 * 
+	 * 'points' amount and notify the playTurn
+	 * function to call the castLimb function
 	 */
 	@Override
 	public void hurt(int points) {
 		hitPoints -= points;
 		
-		limb.castLimb(this);
+		cutLimb = true;
 	}
 
 	/**
 	 * If a Zombie can attack, it will.  If not, it will chase any human within 10 spaces.  
 	 * If no humans are close enough it will wander randomly.
 	 * Have 10 percent chance of saying 'Braiinnns' every turn
-	 * 
+	 * Call the castLimb method to determine whether or not to cast off a limb when damage are taken
 	 * 
 	 * @param actions list of possible Actions
 	 * @param lastAction previous Action, if it was a multiturn action
@@ -110,12 +113,18 @@ public class Zombie extends ZombieActor {
 //		
 //			System.out.println("! " + a.menuDescription(this));
 //		}
-		RandomGenerator rand = new RandomGenerator();
+		RandomGenerator myRand = new RandomGenerator();
+
+		if(cutLimb == true) {
+			limb.castLimb(this, map);
+			cutLimb = false;
+		}
+		
 		try {
 			int[] probability = {10,90};
-			int choiceIndex = rand.probRandom(probability);
+			int choiceIndex = myRand.probRandom(probability);
 			if(choiceIndex == 0) {
-				display.println(name + "says Braaaaaaaains");
+				display.println(this.name + " says Braaaaaaaains");
 			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -136,7 +145,7 @@ public class Zombie extends ZombieActor {
 						return action;
 					}
 				}else {
-					continue;
+					return action;
 				}
 		}
 		return new DoNothingAction();	

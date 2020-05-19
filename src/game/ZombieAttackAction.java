@@ -41,14 +41,12 @@ public class ZombieAttackAction extends AttackAction {
 
 		Weapon weapon = actor.getWeapon(); // automatically return intrinsic weapon if actor no weapon
 		
-		if (isBite(weapon) ==  true) {
-			ArrayList<Integer> choice = new ArrayList<Integer>();
-			choice.add(0);
-			choice.add(1);
-			
-			int choiceIndex;
+		if (isBite(weapon) ==  true) {		
 			try {
-				choiceIndex = rand(choice, 60, 0);
+				int[] probability = {60, 40};
+				RandomGenerator myRand = new RandomGenerator();
+
+				int choiceIndex = myRand.probRandom(probability);
 				if(choiceIndex == 0) {
 					return actor + " misses " + target + ".";
 				}
@@ -56,7 +54,7 @@ public class ZombieAttackAction extends AttackAction {
 					actor.heal(5);
 				}
 				
-			} catch (Exception e) {
+			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			}
 			
@@ -68,6 +66,7 @@ public class ZombieAttackAction extends AttackAction {
 
 		int damage = weapon.damage();      
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+		
 		target.hurt(damage);
 		if (!target.isConscious()) {
 			Item corpse = new PortableItem("dead " + target, '%');
@@ -84,11 +83,6 @@ public class ZombieAttackAction extends AttackAction {
 		}
 
 		return result;
-	}
-	
-	private int rand(ArrayList<Integer> choice, int bias, int biasIndex) throws Exception {
-		RandomGenerator b = new RandomGenerator();
-		return b.biasRandom(choice, bias, biasIndex);
 	}
 	
 	private boolean isBite(Weapon weapon) {

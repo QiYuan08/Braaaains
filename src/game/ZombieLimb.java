@@ -18,10 +18,12 @@ import edu.monash.fit2099.engine.Weapon;
 import edu.monash.fit2099.engine.WeaponItem;
 
 /**
- * A class to shows the amount of legs and hand a zombie has left
+ * A class to keep track the amount of legs and hand a zombie has left
  * It is automatically initialized in every zombie object
- * @author Teh Qi Yuan
+ * This class also contain method to cast off a zombie limb when damage is 
+ * received and movement control for the zombie if a zombie has broken leg
  * 
+ * @author Teh Qi Yuan
  *
  */
 public class ZombieLimb {
@@ -43,18 +45,20 @@ public class ZombieLimb {
 	 * Method to calculate the determine whether a limb will 
 	 * be cast of based on a probability (currently its 25)
 	 * 
-	 * @return int The choice of whether a limb will be cast off
-	 *  0 : not casting limb off
-	 *  1 : casting an arm or leg off
+	 * @return boolean True when a limb is cast of and false otherwise
+
 	 */
-	private int willFall(){
+	private boolean willFall(){
 		
 		// 75 percent for not cutting limb
 		// 25 percent for casting off limb
 		int[] probability = {75,25}; 		
 		int choosenChoice = rand.probRandom(probability);
 		
-		return choosenChoice;
+		if (choosenChoice == 1) {
+			return true;
+		}
+		return false;
 	}
 	
 	/** 
@@ -108,32 +112,36 @@ public class ZombieLimb {
 	 * dropping weapon
 	 * If zombie loses both hand, it must drop the weapon
 	 */
-	public void castLimb(Actor actor) {
+	public void castLimb(Actor actor, GameMap map) {
 		
-		Location here = actorLocation.locationOf(actor);
-		GameMap map = here.map();
+		Location here = map.locationOf(actor);
 		
-		// Determine whether a hand or leg will be cast of
-		int handOrLeg = equalProbability();
-		
-		if(handOrLeg == 0) {  // casting off a hand
-			if (this.hand > 0) {
-				this.hand -= 1;
-				
-				// drop an ZombieHand weapon
-				here.addItem(new ZombieHand());
-				
-				// if the zombie holding an weapon
-				if(actor.getWeapon() instanceof IntrinsicWeapon) {
-					dropWeapon(actor, here, map);
+		if (willFall()) {
+			// Determine whether a hand or leg will be cast of
+			int handOrLeg = equalProbability();
+			
+			if(handOrLeg == 0) {  // casting off a hand
+				if (this.hand > 0) {
+					this.hand -= 1;
+					display.println(actor.toString() + " has fallen a hand");
+					
+					// drop an ZombieHand weapon
+					here.addItem(new ZombieHand());
+					
+					// if the zombie holding an weapon drop it
+					if(actor.getWeapon() instanceof IntrinsicWeapon) {
+						dropWeapon(actor, here, map);
+					}
 				}
 			}
-		}
-		else if(handOrLeg == 1){ // casting of a leg
-			if(this.leg > 0) {
-				this.leg -= 1;
-				
-				here.addItem(new ZombieLeg());
+			else if(handOrLeg == 1){ // casting of a leg
+				if(this.leg > 0) {
+					this.leg -= 1;
+					display.println(actor.toString() + " has fallen a leg");
+
+					
+					here.addItem(new ZombieLeg());
+				}
 			}
 		}
 	}
