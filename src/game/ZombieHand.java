@@ -18,6 +18,6 @@ public class ZombieHand extends WeaponItem {
 	 * Added a craft action into the allowableActions for every zombie limb
 	 */
 	public ZombieHand() {
-		super("ZombieHand", '%', 11, "swing");
+		super("ZombieHand", '$', 11, "swing");
 	}
 }
