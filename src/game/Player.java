@@ -42,10 +42,15 @@ public class Player extends Human {
 				actions.add(new CraftAction("ZombieLeg", "ZombieMace"));
 			}
 		}
-		// Return HarvestAction when on ripe crop
-		if(map.locationOf(this).getGround().getDisplayChar() == 'C'){
-			actions.add(new HarvestAction(map.locationOf(this)));
+		// Return HarvestAction when on ripe crop using Crop.allowableActions
+		if(map.locationOf(this).getGround() instanceof Crop){
+			Crop cropObj = (Crop) map.locationOf(this).getGround();
+			Actions allowableActions = cropObj.allowableActions(this, map.locationOf(this), "here");
+			for(Action action : allowableActions) {
+				actions.add(action);
+			}
 		}
+		
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		return menu.showMenu(this, actions, display);
