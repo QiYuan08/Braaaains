@@ -28,7 +28,6 @@ public class Player extends Human {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
-		
 		// add craft action into player if they have a zombiehand or leg
 		for(Item item : this.getInventory()) {
 			if(item instanceof ZombieHand) {
@@ -38,7 +37,10 @@ public class Player extends Human {
 				actions.add(new CraftAction("ZombieLeg", "ZombieMace"));
 			}
 		}
-		
+		// Return HarvestAction when on ripe crop
+		if(map.locationOf(this).getGround().getDisplayChar() == 'C'){
+			actions.add(new HarvestAction(map.locationOf(this)));
+		}
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		return menu.showMenu(this, actions, display);
