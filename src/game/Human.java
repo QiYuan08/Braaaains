@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
+import edu.monash.fit2099.engine.PickUpItemAction;
 
 /**
  * Class representing an ordinary human.
@@ -40,6 +41,20 @@ public class Human extends ZombieActor {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// FIXME humans are pretty dumb, maybe they should at least run away from zombies?
+		// Prioritize survival, heal if hp is not max and inventory of Actor has Food
+		if(this.hitPoints < this.maxHitPoints) {
+			for(Item item : this.getInventory())
+				if(item instanceof Food) {
+					int healAmount = ((Food) item).getHealAmount();
+					return new HealAction(healAmount);
+				}
+		}
+		// If human actor is standing on a Food object, pick it up
+		for(Item i : map.locationOf(this).getItems()) {
+			if(i instanceof Food) {
+				return new PickUpItemAction(i);
+			}
+		}
 		return behaviour.getAction(this, map);
 	}
 
