@@ -2,7 +2,6 @@ package game;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
@@ -53,21 +52,21 @@ public class testing {
 		Actor player = new Player("Player", '@', 2000);
 		world.addPlayer(player, gameMap.at(42, 15));
 		
-//	    // Place some random humans
-//		String[] humans = {"Carlton", "May", "Vicente", "Andrea", "Wendy",
-//				"Elina", "Winter", "Clem", "Jacob", "Jaquelyn"};
-//		int x, y;
-//		for (String name : humans) {
-//			do {
-//				x = (int) Math.floor(Math.random() * 20.0 + 30.0);
-//				y = (int) Math.floor(Math.random() * 7.0 + 5.0);
-//			} 
-//			while (gameMap.at(x, y).containsAnActor());
-//			gameMap.at(x,  y).addActor(new Human(name));	
-//		}
+	    // Place some random humans
+		String[] humans = {"Carlton", "May", "Vicente", "Andrea", "Wendy",
+				"Elina", "Winter", "Clem", "Jacob", "Jaquelyn"};
+		int x, y;
+		for (String name : humans) {
+			do {
+				x = (int) Math.floor(Math.random() * 20.0 + 30.0);
+				y = (int) Math.floor(Math.random() * 7.0 + 5.0);
+			} 
+			while (gameMap.at(x, y).containsAnActor());
+			gameMap.at(x,  y).addActor(new Human(name));	
+		}
 		
 		// place a simple weapon
-//		gameMap.at(74, 20).addItem(new Plank());
+		gameMap.at(74, 20).addItem(new Plank());
 		
 		 gameMap.at(42, 15).addItem(new ZombieHand());
 		 gameMap.at(42, 15).addItem(new ZombieLeg());

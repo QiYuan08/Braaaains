@@ -14,9 +14,6 @@ import edu.monash.fit2099.engine.GameMap;
  * next to an Actor that they can attack.
  * 
  * @author ram
- * 
- * TODO: check condition to see if the actor is zombie in geAction
- * 		 if yes return ZombieAttackAction instead of AttackAction
  *
  */
 public class AttackBehaviour implements Behaviour {

@@ -1,43 +1,13 @@
 package game;
-/* TODO: can overrides the getIntrinsicWeapon methods to add probability of bites to punch
- * 		 the use random(fist, bite)
- *		 then heal using heal function
- * 
- * playTurn()
- * TODO: check for item in the location then
- *       pickup item from the actions list @ (actions[size - 1])
- *       cuz if there is an item, the pickup action is always at same position
- * 
- * TODO: can add probability to say "BRAINNNSS" here too ?
- * 
- *       
- * TODO: override the hurt function to have the probability of broken limb and dropping weapon
- * 
- * plyTurn()
- * TODO: add a if statement before the for loop to check if lastAction
- *       is not null and there is a broken leg, then return doNothing
- *       action if it is. 
- *       
- *       check for broken leg oso
- *
- * breaking Limb
- * TODO: call a method in Limb to see whether to  break the limb or not
- * 		 also check if no. of broken limb exceed 2
- * 
- * 
- */
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.ActorLocations;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
-import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.MoveActorAction;
 import edu.monash.fit2099.engine.PickUpItemAction;
 
@@ -49,7 +19,6 @@ import edu.monash.fit2099.engine.PickUpItemAction;
  */
 public class Zombie extends ZombieActor {
 	
-	private Display display;
 	private ZombieLimb limb = new ZombieLimb();
 	RandomGenerator myRand = new RandomGenerator();
 	private boolean cutLimb = false;
@@ -118,12 +87,20 @@ public class Zombie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-
+		
+		// check if limb cutting is required
 		if(cutLimb == true) {
 			String result = limb.castLimb(this, map);
 			if(result != null) {
 				display.println(result);
 			}
+			
+			// determine whether to drop the weapon
+			result = limb.dropWeapon(this,map);
+			if(result != null) {
+				display.println(result);
+			}
+			
 			cutLimb = false;
 		}
 		
