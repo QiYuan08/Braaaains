@@ -37,6 +37,7 @@ public class Human extends ZombieActor {
 	protected Human(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints, ZombieCapability.ALIVE);
 	}
+	
 
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
@@ -45,8 +46,8 @@ public class Human extends ZombieActor {
 		if(this.hitPoints < this.maxHitPoints) {
 			for(Item item : this.getInventory())
 				if(item instanceof Food) {
-					int healAmount = ((Food) item).getHealAmount();
-					return new HealAction(healAmount);
+					Food foodObj = ((Food) item);
+					return foodObj.getHealAction();
 				}
 		}
 		// If human actor is standing on a Food object, pick it up

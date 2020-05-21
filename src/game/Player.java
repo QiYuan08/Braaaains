@@ -34,15 +34,20 @@ public class Player extends Human {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
 		// add craft action into player if they have a zombiehand or leg
+		// add HealAction into player if they have a Food
 		for(Item item : this.getInventory()) {
 			if(item instanceof ZombieHand) {
 				actions.add(new CraftAction("ZombieHand", "ZombieClub"));
 			}
-			else if( item instanceof ZombieLeg) {
+			if(item instanceof ZombieLeg) {
 				actions.add(new CraftAction("ZombieLeg", "ZombieMace"));
 			}
+			if(item instanceof Food) {
+				Food foodObj = (Food) item;
+				actions.add(foodObj.getHealAction());
+			}
 		}
-		// Return HarvestAction when on ripe crop using Crop.allowableActions
+		// Add HarvestAction when on ripe crop using Crop.allowableActions
 		if(map.locationOf(this).getGround() instanceof Crop){
 			Crop cropObj = (Crop) map.locationOf(this).getGround();
 			Actions allowableActions = cropObj.allowableActions(this, map.locationOf(this), "here");
@@ -50,6 +55,8 @@ public class Player extends Human {
 				actions.add(action);
 			}
 		}
+		
+		
 		
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();

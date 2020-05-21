@@ -1,5 +1,6 @@
 package game;
 
+import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 
@@ -19,7 +20,6 @@ public class Food extends PortableItem{
 	public Food(String name, char displayChar, int healAmount) {
 		super(name, displayChar);
 		this.healAmount = healAmount;
-		this.allowableActions.add(new HealAction(this.healAmount));
 	}
 	
 	/**
@@ -33,8 +33,6 @@ public class Food extends PortableItem{
 	
 	/**
 	 * Overriden tick method to check whether a Food item exist at this current location
-	 * Used to check if the Food object is picked up by an actor to remove the PickUpAction
-	 * and add DropAction.
 	 */
 	public void tick(Location currentLocation) {
 		boolean itemExists = false;
@@ -45,9 +43,11 @@ public class Food extends PortableItem{
 		}
 		if(itemExists == false) {
 			currentLocation.removeItem(this);
-			this.allowableActions.remove(getPickUpAction());
-			this.allowableActions.add(getDropAction());
 		}
+	}
+	
+	public Action getHealAction() {
+		return new HealAction(this.healAmount, this);
 	}
 
 }
