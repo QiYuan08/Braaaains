@@ -9,12 +9,14 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.WeaponItem;
 
 /**
- * @author Asus
+ * @author Teh Qi Yuan
+ * 
+ * Weapon created from zombie casted off leg
  *
  */
 public class ZombieLeg extends WeaponItem {
 
 	public ZombieLeg() {
-		super("ZombieLeg", '|', 15, "swing");
+		super("ZombieLeg", '|', 15, "smash");
 	}
 }

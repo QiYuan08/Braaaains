@@ -53,7 +53,7 @@ public class testing {
 		Actor player = new Player("Player", '@', 2000);
 		world.addPlayer(player, gameMap.at(42, 15));
 		
-	    // Place some random humans
+//	    // Place some random humans
 //		String[] humans = {"Carlton", "May", "Vicente", "Andrea", "Wendy",
 //				"Elina", "Winter", "Clem", "Jacob", "Jaquelyn"};
 //		int x, y;
@@ -75,9 +75,9 @@ public class testing {
 		
 		// FIXME: Add more zombies!
 		gameMap.at(41, 16).addActor(new Zombie("Groan"));
-//		gameMap.at(30,  18).addActor(new Zombie("Boo"));
+		gameMap.at(30,  18).addActor(new Zombie("Boo"));
 //		gameMap.at(10,  4).addActor(new Zombie("Uuuurgh"));
-//		gameMap.at(50, 18).addActor(new Zombie("Mortalis"));
+		gameMap.at(50, 18).addActor(new Zombie("Mortalis"));
 //		gameMap.at(1, 10).addActor(new Zombie("Gaaaah"));
 //		gameMap.at(62, 12).addActor(new Zombie("Aaargh"));	
 		world.run();

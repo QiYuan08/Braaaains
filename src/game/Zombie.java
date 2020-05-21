@@ -118,14 +118,12 @@ public class Zombie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-//		System.out.println("!!!" + actions.get(actions.size() - 2).menuDescription(this));
-//		for (Action a: actions) {
-//		
-//			System.out.println("! " + a.menuDescription(this));
-//		}
 
 		if(cutLimb == true) {
-			limb.castLimb(this, map);
+			String result = limb.castLimb(this, map);
+			if(result != null) {
+				display.println(result);
+			}
 			cutLimb = false;
 		}
 		

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package game;
 
 import java.util.ArrayList;
@@ -15,12 +12,7 @@ import edu.monash.fit2099.engine.Weapon;
 /**
  * @author Teh Qi Yuan
  * 
- * A attack action class for the zombie
- * 
- * TODO: need to check for losing arms probability
- * 	- loss weapon when both arm loss
- *  - 50% of dropping weapon if one arm loss
- *  - probability of punching is halved if one arm is loss
+ *         A attack action class for the zombie
  *
  */
 public class ZombieAttackAction extends AttackAction {
@@ -28,63 +20,67 @@ public class ZombieAttackAction extends AttackAction {
 	public ZombieAttackAction(Actor target) {
 		super(target);
 	}
-	
+
 	/**
-	 * This method will perform different attack action for the zombie
-	 * based on the zombie condition
-	 * e.g.
-	 * - Zombie had only one hand or no hand
-	 * - Zombie has weapon or not
+	 * This method will perform different attack action for the zombie based on the
+	 * zombie condition e.g. - Zombie had only one hand or no hand - Zombie has
+	 * weapon or not
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
 		Weapon weapon = actor.getWeapon(); // automatically return intrinsic weapon if actor no weapon
-		
-		if (isBite(weapon) ==  true) {		
+
+		// if the intrisic weapon is bite, it has a 40 % of hitting only
+		if (isBite(weapon) == true) {
 			try {
-				int[] probability = {60, 40};
+				int[] probability = { 60, 40 };
 				RandomGenerator myRand = new RandomGenerator();
 
 				int choiceIndex = myRand.probRandom(probability);
-				if(choiceIndex == 0) {
+				if (choiceIndex == 0) {
 					return actor + " misses " + target + ".";
-				}
-				else {
+				} else {
+					// healing the zombie if biting hits
 					actor.heal(5);
 				}
-				
+
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			}
-			
-		}
-		
-		if (rand.nextBoolean()) {  // randomly let the actor miss his target
-			return actor + " misses " + target + ".";
+		} else { // if its other weapon, 50 % chance of missing
+			if (rand.nextBoolean()) { // randomly let the actor miss his target
+				return actor + " misses " + target + ".";
+			}
 		}
 
-		int damage = weapon.damage();      
+		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-		
+
 		target.hurt(damage);
 		if (!target.isConscious()) {
 			Item corpse = new PortableItem("dead " + target, '%');
 			map.locationOf(target).addItem(corpse);
-			
+
 			Actions dropActions = new Actions();
 			for (Item item : target.getInventory())
 				dropActions.add(item.getDropAction());
-			for (Action drop : dropActions)		
+			for (Action drop : dropActions)
 				drop.execute(target, map);
-			map.removeActor(target);	
-			
+			map.removeActor(target);
+
 			result += System.lineSeparator() + target + " is killed.";
 		}
 
 		return result;
 	}
-	
+
+	/**
+	 * A method to determine whether the weapon is biting
+	 * 
+	 * @param weapon The weapon to be checked
+	 * @return True if the weapon is biting and false otherwise
+	 */
 	private boolean isBite(Weapon weapon) {
 		return weapon.verb() == "bites";
 	}

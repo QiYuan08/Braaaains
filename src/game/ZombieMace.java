@@ -13,7 +13,7 @@ import edu.monash.fit2099.engine.WeaponItem;
 public class ZombieMace extends WeaponItem {
 
 	public ZombieMace() {
-		super("ZombieMace", '{', 20, "swing");
+		super("ZombieMace", '{', 20, "smash");
 	}
 
 }

@@ -21,16 +21,26 @@ public class RandomGenerator {
 	 * This method is used to return an choices in the form of integer starting from
 	 * 0 to N number of choices, where N is the length of input parameter probability
 	 * 
-	 * @exception IllegalArgumentException if the sum of probability given is not
-	 *                                     100
+	 * @exception IllegalArgumentException if the sum of probability given is not 100
 	 * @param probability The probability of each event in integer
 	 * @return The index of the event based on the probability list given
 	 * 
 	 */
 	public int probRandom(int[] probability) {
+		
+		/*
+		 * This method works buy creating a range from 0 - 99 for each
+		 * item and then generate a random number, if the random number is within 
+		 * the range, then return the item.
+		 * E.g an array of probability [20, 30, 50]
+		 * a range of (0,19) (20,29), (30, 99) is created and a random 
+		 * number is generated to see in which range it falls into
+		 * 
+		 */
 
 		int choiceIndex = 0;
 		int sum = 0;
+		// using arrayList because I need to add 1 as the first item
 		ArrayList<Integer> clonedList = new ArrayList<Integer>();
 		clonedList = cloneArray(probability);
 
@@ -54,7 +64,13 @@ public class RandomGenerator {
 
 		return choiceIndex;
 	}
-
+	
+	/**
+	 * A method to clone an array into an equivalent 
+	 * arrayList
+	 * @param original The original arrayList
+	 * @return The arrayList with similar element as input array
+	 */
 	private ArrayList<Integer> cloneArray(int[] original) {
 
 		ArrayList<Integer> clonedArray = new ArrayList<Integer>();

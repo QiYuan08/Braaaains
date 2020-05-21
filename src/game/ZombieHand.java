@@ -12,12 +12,7 @@ import edu.monash.fit2099.engine.WeaponItem;
  */
 public class ZombieHand extends WeaponItem {
 
-	/**
-	 * Constructor
-	 * 
-	 * Added a craft action into the allowableActions for every zombie limb
-	 */
 	public ZombieHand() {
-		super("ZombieHand", '$', 11, "swing");
+		super("ZombieHand", '$', 11, "smash");
 	}
 }

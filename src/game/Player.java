@@ -24,7 +24,12 @@ public class Player extends Human {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 	}
-
+	
+	
+	/**
+	 * Player will have the option of crafting weapon if a zombie hand or leg
+	 * are in their inventory
+	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions

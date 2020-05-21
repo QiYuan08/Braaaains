@@ -34,7 +34,6 @@ public class CraftAction extends Action {
 
 	/**
 	 * Craft an zombie leg into a mace of a zombie hand into a club
-	 * 
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {

@@ -36,6 +36,8 @@ public class AttackBehaviour implements Behaviour {
 
 	/**
 	 * Returns an AttackAction that attacks an adjacent attackable Actor.
+	 * If the actor is a zombie, the attack is retrieved from ZombieAttackAction class
+	 * else if actor is human, the attack is retrieved from AttackAction class
 	 * 
 	 * Actors are attackable if their ZombieCapability matches the 
 	 * "undeadness status" set 

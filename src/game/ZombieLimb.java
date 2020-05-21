@@ -120,9 +120,10 @@ public class ZombieLimb {
 	 * dropping weapon
 	 * If zombie loses both hand, it must drop the weapon
 	 */
-	public void castLimb(Actor actor, GameMap map) {
+	public String castLimb(Actor actor, GameMap map) {
 		
 		Location here = map.locationOf(actor);
+		String result =  null;
 		
 		if (willFall()) {
 			// Determine whether a hand or leg will be cast of
@@ -131,7 +132,7 @@ public class ZombieLimb {
 			if(handOrLeg == 0) {  // casting off a hand
 				if (this.hand > 0) {
 					this.hand -= 1;
-					display.println(actor.toString() + " has fallen a hand");
+					result = actor.toString() + " has fallen a hand";
 					
 					// drop an ZombieHand weapon
 					here.addItem(new ZombieHand());
@@ -145,13 +146,15 @@ public class ZombieLimb {
 			else if(handOrLeg == 1){ // casting of a leg
 				if(this.leg > 0) {
 					this.leg -= 1;
-					display.println(actor.toString() + " has fallen a leg");
+					result = actor.toString() + " has fallen a leg";
 
 					
 					here.addItem(new ZombieLeg());
 				}
 			}
 		}
+		
+		return result;
 	}
 	
 	/**
