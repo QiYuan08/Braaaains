@@ -6,7 +6,9 @@ package game;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.IntrinsicWeapon;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 
@@ -51,7 +53,8 @@ public class ZombieLimb {
 		
 		// 75 percent for not cutting limb
 		// 25 percent for casting off limb
-		int[] probability = {75,25}; 		
+		int[] probability = {75,25}; 	
+		
 		int choosenChoice = rand.probRandom(probability);
 		
 		if (choosenChoice == 1) {
@@ -80,28 +83,26 @@ public class ZombieLimb {
 	 *  Method to drop any weapon the zombie is holding
 	 * @param actor The actor to perform the action
 	 */
-	public String dropWeapon(Actor actor, GameMap map) {
+	private void dropWeapon(Actor actor, GameMap map, Display display) {
 		
-		String result = null;
+		Action action = null;
 		
 		// if loses both hand must drop all weapon
 		if (this.hand == 0) {
 			for(Item item: actor.getInventory()) {
-				Action action = item.getDropAction();
-				result = action.execute(actor, map);
+				action = item.getDropAction();
 			}
 		}
 		// if loses 1 hand 50% of dropping a weapon
 		else if (this.hand == 1) {
-			if (equalProbability() == 1) {
+			if (equalProbability() == 0) {
 				for(Item item: actor.getInventory()) {
-					Action action = item.getDropAction();
-					result = action.execute(actor, map);
+					action = item.getDropAction();
 				}
 			}
 		}
-		
-		return result;
+		display.println(action.execute(actor, map));
+
 	}
 	
 	/**
@@ -112,11 +113,11 @@ public class ZombieLimb {
 	 * dropping weapon
 	 * If zombie loses both hand, it must drop the weapon
 	 */
-	public String castLimb(Actor actor, GameMap map) {
+	public String castLimb(Actor actor, GameMap map, Display display) {
 		
 		Location here = map.locationOf(actor);
 		String result =  null;
-		
+
 		if (willFall()) {
 			// Determine whether a hand or leg will be cast of
 			int handOrLeg = equalProbability();
@@ -124,22 +125,21 @@ public class ZombieLimb {
 			if(handOrLeg == 0) {  // casting off a hand
 				if (this.hand > 0) {
 					this.hand -= 1;
-					result += actor.toString() + " has fallen a hand";
+					result = actor + " has fallen a hand";
 					
 					// drop an ZombieHand weapon
 					here.addItem(new ZombieHand());
 					
-//					// if the zombie holding an weapon drop it
-//					if(actor.getWeapon() instanceof IntrinsicWeapon) {
-//						dropWeapon(actor, here, map);
-//					}
+					// if the zombie holding an weapon drop it
+					if(!(actor.getWeapon() instanceof IntrinsicWeapon)) {
+						dropWeapon(actor, map,display);
+					}
 				}
 			}
 			else if(handOrLeg == 1){ // casting of a leg
 				if(this.leg > 0) {
 					this.leg -= 1;
-					result = actor.toString() + " has fallen a leg";
-
+					result = actor + " has fallen a leg";
 					
 					here.addItem(new ZombieLeg());
 				}
