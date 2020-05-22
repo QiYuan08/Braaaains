@@ -53,7 +53,8 @@ public class ZombieLimb {
 		
 		// 75 percent for not cutting limb
 		// 25 percent for casting off limb
-		int[] probability = {75,25}; 		
+		int[] probability = {75,25}; 	
+		
 		int choosenChoice = rand.probRandom(probability);
 		
 		if (choosenChoice == 1) {
