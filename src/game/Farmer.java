@@ -31,12 +31,25 @@ public class Farmer extends Human{
 	 * which includes (SowAction, HarvestAction and FertilizeAction). Else, it wanders around
 	 */
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		// Farmer picking up food at its location
+		Action pickUpFood = existFood(map);
+		if(pickUpFood != null) {
+			return pickUpFood;
+		}
+		// Farmer performing healing if possible (Survival priority)
+		Action healing = this.healActor(map);
+		if(healing != null) {
+			return healing;
+		}
+		// Farmer perform farming actions
 		for (Behaviour behaviour : behaviours) {
 			Action action = behaviour.getAction(this, map);
 			if (action != null) {
 				return action;
 			}
 		}
+		
+		// Wander if unable to perform any actions
 		return behaviours[1].getAction(this, map);
 	}
 }

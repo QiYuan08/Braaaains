@@ -42,9 +42,9 @@ public class Player extends Human {
 			if(item instanceof ZombieLeg) {
 				actions.add(new CraftAction("ZombieLeg", "ZombieMace"));
 			}
-			if(item instanceof Food) {
-				Food foodObj = (Food) item;
-				actions.add(foodObj.getHealAction());
+			Action healing = this.healActor(map);
+			if(healing != null) {
+				actions.add(healing);
 			}
 		}
 		// Add HarvestAction when on ripe crop using Crop.allowableActions
@@ -55,8 +55,6 @@ public class Player extends Human {
 				actions.add(action);
 			}
 		}
-		
-		
 		
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
