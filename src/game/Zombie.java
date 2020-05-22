@@ -84,15 +84,6 @@ public class Zombie extends ZombieActor {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 
-		// check if limb cutting is required
-		if (cutLimb == true) {
-			String result = limb.castLimb(this, map, display);
-			if (result != null) {
-				display.println(result);
-			}
-			cutLimb = false;
-		}
-
 		try {
 			int[] probability = { 10, 90 };
 			int choiceIndex = myRand.probRandom(probability);
@@ -108,6 +99,15 @@ public class Zombie extends ZombieActor {
 			if (this.getInventory().size() < 2) { // zombie are only allowed to hold one weapon
 				return actions.get(actions.size() - 2);
 			}
+		}
+		
+		// check if limb cutting is required
+		if (cutLimb == true) {
+			String result = limb.castLimb(this, map, display);
+			if (result != null) {
+				display.println(result);
+			}
+			cutLimb = false;
 		}
 
 		for (Behaviour behaviour : behaviours) {
