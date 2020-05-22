@@ -26,13 +26,13 @@ public class SowAction extends Action{
 	@Override
 	/**
 	 * An overriden method that creates a Crop as a result of SowAction.
-	 * Returns a string if SowAction is sucessful with the chance of 33%
+	 * Returns a string if SowAction is successful with the chance of 33%
 	 */
 	public String execute(Actor actor, GameMap map) {
 		double rand = Math.random(); // Create a random number
 		if(rand > 0.00 && rand <= SowAction.PROBABILITY) {
 			this.location.setGround(new Crop(('c')));  // Create a new Crop and return the action string
-			return actor + " " + " sowed a crop at (" + this.location.x() + "," + this.location.y() + ")";
+			return actor + " " + "sowed a crop at (" + this.location.x() + "," + this.location.y() + ")";
 		}
 		return actor + " failed to sow any crop."; 
 	}

@@ -11,18 +11,21 @@ import edu.monash.fit2099.engine.GameMap;
  */
 public class HealAction extends Action{
 	int points;
+	Food food;
 	
 	/**
 	 * The constructor of HealAction with a single integer parameter
 	 * @param healAmount The amount that should be healed for when the actor uses this action
 	 */
-	public HealAction(int healAmount) {
+	public HealAction(int healAmount, Food foodObj) {
 		this.points = healAmount;
+		this.food = foodObj;
 	}
 
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		actor.heal(this.points);
+		actor.removeItemFromInventory(this.food);
 		return actor + " is healed for " + this.points + ".";
 	}
 
