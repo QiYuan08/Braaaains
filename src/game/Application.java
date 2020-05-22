@@ -65,7 +65,7 @@ public class Application {
 			gameMap.at(x,  y).addActor(new Human(name));	
 		}
 		
-		// Plce some random farmers
+		// Place some random farmers
 		String[] farmer = {"James", "Jason", "Jamie"};
 		for(String farmer_names : farmer) {
 			do {

@@ -61,7 +61,7 @@ public class Corpse extends PortableItem{
 			this.probability += 0.2;
 		}
 		double randomNumber = Math.random() + this.probability;
-		if(randomNumber >= 1 && becameZombie == false && currentLocation.containsAnActor() == false) {
+		if(randomNumber >= 1 && this.becameZombie == false && currentLocation.containsAnActor() == false) {
 			currentLocation.addActor(new Zombie(this.name));
 			this.becameZombie = true;
 			currentLocation.removeItem(this);

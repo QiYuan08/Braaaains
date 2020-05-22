@@ -57,7 +57,7 @@ public class ZombieAttackAction extends AttackAction {
 
 		target.hurt(damage);
 		if (!target.isConscious()) {
-			Item corpse = new PortableItem("dead " + target, '%');
+			Corpse corpse = new Corpse("dead " + target, '%');
 			map.locationOf(target).addItem(corpse);
 
 			Actions dropActions = new Actions();
