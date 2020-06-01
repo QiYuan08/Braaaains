@@ -16,6 +16,7 @@ public class HealAction extends Action{
 	/**
 	 * The constructor of HealAction with a single integer parameter
 	 * @param healAmount The amount that should be healed for when the actor uses this action
+	 * @param foodObj The food object that creates this action
 	 */
 	public HealAction(int healAmount, Food foodObj) {
 		this.points = healAmount;

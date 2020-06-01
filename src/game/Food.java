@@ -16,6 +16,7 @@ public class Food extends PortableItem{
 	 * The constructor of Food. Accepts 2 parameters name and displayChar which are the same as parent Item class constructor
 	 * @param name Name of food
 	 * @param displayChar Display character on game map
+	 * @param healAmount The amount of health to be healed. Default: 10
 	 */
 	public Food(String name, char displayChar, int healAmount) {
 		super(name, displayChar);

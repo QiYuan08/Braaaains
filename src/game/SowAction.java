@@ -18,6 +18,7 @@ public class SowAction extends Action{
 	/**
 	 * A SowAction constructor where the parameter is a Location object which is 
 	 * determines the location where sow action should occur
+	 * @param location The location where the sow action is performed on
 	 */
 	public SowAction(Location location) {
 		this.location = location;
