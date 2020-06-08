@@ -94,12 +94,12 @@ public class Zombie extends ZombieActor {
 			e.printStackTrace();
 		}
 
-		// if there is item at zombie location pick it up
-		if (actions.get(actions.size() - 2) instanceof PickUpItemAction) {
-			if (this.getInventory().size() < 2) { // zombie are only allowed to hold one weapon
-				return actions.get(actions.size() - 2);
-			}
-		}
+//		// if there is item at zombie location pick it up
+//		if (actions.get(actions.size() - 2) instanceof PickUpItemAction) {
+//			if (this.getInventory().size() < 2) { // zombie are only allowed to hold one weapon
+//				return actions.get(actions.size() - 2);
+//			}
+//		}
 		
 		// check if limb cutting is required
 		if (cutLimb == true) {

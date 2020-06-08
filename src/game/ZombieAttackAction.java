@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.Weapon;
 /**
  * @author Teh Qi Yuan
  * 
- *         A attack action class for the zombie
+ * A attack action class for the zombie
  *
  */
 public class ZombieAttackAction extends AttackAction {

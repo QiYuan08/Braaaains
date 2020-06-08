@@ -137,6 +137,7 @@ public class World {
 		}
 		actions.add(new DoNothingAction());
 
+
 		Action action = actor.playTurn(actions, lastActionMap.get(actor), map, display);
 		lastActionMap.put(actor, action);
 		
