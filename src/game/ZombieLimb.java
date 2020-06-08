@@ -112,6 +112,10 @@ public class ZombieLimb {
 	 * If zombie loses one hand, it will have 50% chance of
 	 * dropping weapon
 	 * If zombie loses both hand, it must drop the weapon
+	 * @param actor The zombie that will cast of the limb
+	 * @param map The map where the zombie is placed
+	 * @param display the I/O object to which messages may be written
+	 * @return string String representation as of whether a limb will be casted off
 	 */
 	public String castLimb(Actor actor, GameMap map, Display display) {
 		
