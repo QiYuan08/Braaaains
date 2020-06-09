@@ -16,7 +16,7 @@ public class QuitAction extends Action{
 
 	@Override
 	public String menuDescription(Actor actor) {
-		return "Quit game";
+		return "Player quits game";
 	}
 	
 	public String hotkey() {
