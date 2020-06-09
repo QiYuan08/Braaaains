@@ -8,10 +8,17 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
+/**
+ * The MamboHidingAction is used when MamboMarie is camouflaged within the gameMap. It returns random dialogues to th display on execute.
+ * @author Fong Zhong Kern
+ *
+ */
 public class MamboHidingAction extends Action{
     private List<String> mamboDialogues = Arrays.asList("You'll never find me!", "Curse you!", "Damn you!", "Get them Zombies!", "I curse upon this land!", "MUAHAHAHAHAHAHA!");  
 
-	
+	/**
+	 * Empty constructor as we wont be needing any parameters for dialogue executions.
+	 */
 	public MamboHidingAction() {
 	}
 	

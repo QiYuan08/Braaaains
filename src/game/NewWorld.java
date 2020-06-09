@@ -11,8 +11,17 @@ import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.World;
 
+/**
+ * Subclass of World which would be used as the new world within application to process the game. 
+ * @author Fong Zhong Kern
+ *
+ */
 public class NewWorld extends World{
-
+	
+	/**
+	 * NewWorld constructor which requires display parameter to display actors actions on the screen
+	 * @param display A display object
+	 */
 	public NewWorld(Display display) {
 		super(display);
 	}
@@ -30,14 +39,16 @@ public class NewWorld extends World{
 		// This loop is basically the whole game
 		boolean playerQuitted = false;
 		while (stillRunning()) {
+			// Checks if the player quitted the game by checking the returned action of player.
 			if (playerQuitted) {
 				break;
 			}
+			// If there is no more human on the map, the player loses.
 			if (noMoreHuman()) {
 				display.println(endHumanMessage());
 				break;
 			}
-			
+			// When all zombies and MamboMarie is dead, the player wins
 			else if(noMoreZombieAndMambo()) {
 				display.println(endZombieMamboMessage());
 				break;
@@ -46,6 +57,7 @@ public class NewWorld extends World{
 			playersMap.draw(display);                                     // draw the map on console
 
 			// Process all the actors.
+			// Updated process of actors, returns the action to check if the player has inputed a quit action to terminate the game
 			for (Actor actor : actorLocations) {
 				Action action = null;
 				if (stillRunning()) {
@@ -66,6 +78,11 @@ public class NewWorld extends World{
 		display.println(endGameMessage());
 	}
 	
+	/**
+	 * Method that is similar to the processActorsTurn class from the parent but with a return value.
+	 * @param actor The current actor to process its action
+	 * @return The action used by the actor
+	 */
 	protected Action processActorsTurn(Actor actor) {
 		Location here = actorLocations.locationOf(actor);
 		GameMap map = here.map();
@@ -109,6 +126,10 @@ public class NewWorld extends World{
 		return action;
 	}
 	
+	/**
+	 * noMoreHuman method which is used to check if there are any more humans on the current gameMap
+	 * @return Boolean indicating if there are any more humans on the gameMap
+	 */
 	protected boolean noMoreHuman() {
 		boolean noMoreHuman = true;
 		for(Actor actor : actorLocations) {
@@ -123,6 +144,10 @@ public class NewWorld extends World{
 		return noMoreHuman;
 	}
 	
+	/**
+	 * noMoreZombieAndMambo method that checks if there are any more Zombies or MamboMarie on the current gameMap
+	 * @return A boolean which checks if there are any more Zombies or MamboMarie on the current map
+	 */
 	protected boolean noMoreZombieAndMambo() {
 		boolean noMoreZombie = true;
 		boolean noMoreMambo = true;
@@ -142,14 +167,26 @@ public class NewWorld extends World{
 		}
 	}
 	
+	/**
+	 * endPlayerMessage used to indicate final message that player has died.
+	 * @return A string "You died"
+	 */
 	protected String endPlayerMessage() {
 		return "You died";
 	}
 	
+	/**
+	 * endHumanMessage used to indicate final message that player has loss due to all humans dead
+	 * @return A string "All humans died"
+	 */
 	protected String endHumanMessage() {
 		return "All humans died";
 	}
 	
+	/**
+	 * endZombieMamboMessage used to indicate that the player has won as all Zombies and MamboMarie is dead
+	 * @return A string "You WIN!"
+	 */
 	protected String endZombieMamboMessage() {
 		return "You WIN!";
 	}
