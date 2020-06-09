@@ -87,7 +87,10 @@ public class Player extends Human {
 				actions.add(action);
 			}
 		}
-
+		
+		// Adding Quit to menu
+		actions.add(new QuitAction());
+		
 		if (lastAction.getNextAction() != null && isAiming == true)
 			actions.add(lastAction.getNextAction());
 
