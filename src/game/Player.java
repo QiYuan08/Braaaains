@@ -60,7 +60,6 @@ public class Player extends Human {
 			} else if (item instanceof ZombieLeg) {
 				actions.add(new CraftAction("ZombieLeg", "ZombieMace"));
 			}
-			//////////////////////////////////////////
 			else if (item instanceof Shotgun) {
 				if (haveBullet(item)) {
 					actions.add(new ShotgunMenu(this, display));
@@ -70,7 +69,6 @@ public class Player extends Human {
 					actions.add(new TargetMenu(display));
 				}
 			}
-			//////////////////////////////////////////
 
 			Action healing = this.healActor(map);
 			if (healing != null) {

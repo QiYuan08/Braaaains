@@ -63,7 +63,7 @@ public class ShotgunShootAction extends Action {
 
 						Actor wictim = affectedArea.getActor();
 						wictim.hurt(new Shotgun().damage());
-						result += actor + new Shotgun().verb() + wictim + ".\n";
+						result += actor +" " + new Shotgun().verb() +" "+ wictim + " for " + new Shotgun().damage()+ " damage.\n";
 						if(!actor.isConscious()) {
 							result += ondead.dead(actor, wictim, map);
 						}
@@ -71,7 +71,6 @@ public class ShotgunShootAction extends Action {
 				}
 			}
 		}
-		
 		if(result =="") { // if the player didn't hit anything
 			result = actor + " hit no one.";
 		}

@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.Location;
 /**
  * @author Teh Qi Yuan
  *
- *         Method for user to implement shooting using a sniper rifle
+ *  Method for user to implement shooting using a sniper rifle
  */
 public class SniperShootAction extends AttackAction {
 
@@ -22,8 +22,10 @@ public class SniperShootAction extends AttackAction {
 
 	/**
 	 * Method to traverse in a line between shooter and target and determine the
-	 * damage if it hits and actor or does nothing if it hits a wall or something
-	 * else
+	 * damage if it hits and actor or does nothing if it hits a wall or something else.
+	 * The equation is calculated using the SniperUtil class
+	 * @param actor The actor taking the shot
+	 * @param map The map the actor is
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
@@ -136,7 +138,6 @@ public class SniperShootAction extends AttackAction {
 
 	/**
 	 * A method to return the appropriate damage based on the turn used to aim
-	 * 
 	 * @return The damage amount
 	 */
 	public int getDamage() {

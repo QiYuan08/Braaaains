@@ -11,9 +11,10 @@ import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Menu;
 
 /**
- * @author Teh Qi Yuan This is a class used to let user choose whether to
- *         continue aiming or take a shot for sniper rifle given a different
- *         number of turn used to aim
+ * @author Teh Qi Yuan 
+ * This is a class used to let user choose whether to
+ * continue aiming or take a shot for sniper rifle given a different
+ * number of turn used to aim
  *
  */
 public class SniperMenu extends AttackAction {
@@ -26,6 +27,13 @@ public class SniperMenu extends AttackAction {
 		this.display = display;
 	}
 
+	/**
+	 * Return different action depending on how many round has the player
+	 * aimed at its target
+	 * 
+	 * @param actor The actor using the sniper
+	 * @param map The map the actor is currently in 
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		
@@ -51,16 +59,20 @@ public class SniperMenu extends AttackAction {
 	}
 	
 
+	/**
+	 * Return string
+	 * @param actor Text we put on the menu
+	 */
 	@Override
 	public String menuDescription(Actor actor) {
 		return "Target: " + this.target;
 	}
 
-	@Override
 	/**
 	 * While the number of round used to aim is smaller than 1,
 	 * return the submenu to allow player to aim or shoot
 	 */
+	@Override
 	public Action getNextAction() {
 		if (round_Count < 3) {
 			return this;
