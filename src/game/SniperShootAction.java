@@ -74,7 +74,7 @@ public class SniperShootAction extends AttackAction {
 			wictim.hurt(getDamage());
 			result += actor + " " + new SniperRifle().verb() + " " + this.target;
 			if (!wictim.isConscious()) {
-				result += ondead.dead(actor, wictim, map);
+				result += ondead.dead(wictim, map);
 			}
 		} else {
 			result += actor + " miss " + this.target;

@@ -65,7 +65,7 @@ public class ShotgunShootAction extends Action {
 						wictim.hurt(new Shotgun().damage());
 						result += actor +" " + new Shotgun().verb() +" "+ wictim + " for " + new Shotgun().damage()+ " damage.\n";
 						if(!actor.isConscious()) {
-							result += ondead.dead(actor, wictim, map);
+							result += ondead.dead(wictim, map);
 						}
 
 				}

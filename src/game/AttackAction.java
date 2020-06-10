@@ -45,7 +45,7 @@ public class AttackAction extends Action {
 
 		target.hurt(damage);
 		if (!target.isConscious()) {
-			result += ondead.dead(actor, this.target, map);
+			result += ondead.dead(this.target, map);
 		}
 
 		return result;

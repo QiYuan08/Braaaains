@@ -17,8 +17,6 @@ public class Vehicle extends Item{
 	 * allowableActions
 	 * @param world The world this vehicle is currently in
 	 * @param nextMap The destination map after user choose to travel
-	 * @param x The x coordinate of the player in the new map
-	 * @param y The y coordinate of the player in the new map
 	 */
 	public Vehicle(World world, GameMap nextMap) {
 		super("Car", 'O', false);

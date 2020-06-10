@@ -38,7 +38,7 @@ public class Player extends Human {
 	 * Method to allow other class to determine whether the player aiming is
 	 * modified
 	 * 
-	 * @param aiming
+	 * @param aiming True if is aiming and false otherwise
 	 */
 	public void isAiming(boolean aiming) {
 		this.isAiming = aiming;

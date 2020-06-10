@@ -20,9 +20,10 @@ public class OnDead {
 	 * A method to drop all the item from an actor and turn it into a corpse if
 	 * its killed by someone
 	 * @param map The map in which the actor stay
+	 * @param target The actor that is killed
 	 * @return a description of what happened that can be displayed to the user.
 	 */
-	public String dead(Actor actor, Actor target, GameMap map) {
+	public String dead(Actor target, GameMap map) {
 		Item corpse = new PortableItem("dead " + target, '%');
 		map.locationOf(target).addItem(corpse);
 		
