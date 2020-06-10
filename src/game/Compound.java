@@ -10,6 +10,11 @@ import edu.monash.fit2099.engine.GameMap;
  */
 public class Compound extends Level{
 	
+	/**
+	 * Constructor of Compound object
+	 * @param world The current world that is running by application
+	 * @param gameMap The compound gameMap which represents the groundFactory and compoundMap
+	 */
 	public Compound(NewWorld world, GameMap gameMap) {
 		super(world, gameMap);
 	}
@@ -34,29 +39,32 @@ public class Compound extends Level{
 		}
 		
 		// Place some random farmers
-//		String[] farmer = {"James", "Jason", "Jamie"};
-//		for(String farmer_names : farmer) {
-//			do {
-//				x = (int) Math.floor(Math.random() * 20.0 + 30.0);
-//				y = (int) Math.floor(Math.random() * 10.0 + 5.0);
-//			} 
-//			while (gameMap.at(x, y).containsAnActor());
-//			gameMap.at(x,  y).addActor(new Farmer(farmer_names, 'F', 100));
-//		}
+		String[] farmer = {"Jamerson", "Justin", "Jake"};
+		for(String farmer_names : farmer) {
+			do {
+				x = (int) Math.floor(Math.random() * 20.0 + 30.0);
+				y = (int) Math.floor(Math.random() * 10.0 + 5.0);
+			} 
+			while (gameMap.at(x, y).containsAnActor());
+			gameMap.at(x,  y).addActor(new Farmer(farmer_names, 'F', 100));
+		}
 		
 		// place a simple weapon
 		gameMap.at(74, 20).addItem(new Plank());
+		gameMap.at(30, 20).addItem(new Plank());
+		gameMap.at(30, 18).addItem(new Plank());
 		
-//		gameMap.at(30, 20).addItem(new Plank());
-//		gameMap.at(30, 18).addItem(new Plank());
+		// Spawning MamboMarie
+		MamboSpawn mamboSpawner = new MamboSpawn(gameMap);
+		mamboSpawner.spawnMambo();
 		
 		// FIXME: Add more zombies!
 		gameMap.at(30, 20).addActor(new Zombie("Groan"));
 		gameMap.at(30,  18).addActor(new Zombie("Boo"));
-//		gameMap.at(10,  4).addActor(new Zombie("Uuuurgh"));
-//		gameMap.at(50, 18).addActor(new Zombie("Mortalis"));
-//		gameMap.at(1, 10).addActor(new Zombie("Gaaaah"));
-//		gameMap.at(62, 12).addActor(new Zombie("Aaargh"));
+		gameMap.at(10,  4).addActor(new Zombie("Uuuurgh"));
+		gameMap.at(50, 18).addActor(new Zombie("Mortalis"));
+		gameMap.at(1, 10).addActor(new Zombie("Gaaaah"));
+		gameMap.at(62, 12).addActor(new Zombie("Aaargh"));
 		
 		addVehicle();
 	}
