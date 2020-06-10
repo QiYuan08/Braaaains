@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 
 /**
- * 
+ * MamboMarie class implementation for Assignment 3
  * @author Fong Zhong Kern
  *
  */
@@ -18,17 +18,33 @@ public class MamboMarie extends ZombieActor {
 	private int turn_counter = 0;
 	private int x_coord, y_coord;
 
+	/**
+	 * Constructor for MamboMarie which takes in 4 parameters
+	 * @param name: The name of MamboMarie character, defaulted as ("Voodoo Priestess Mambo Marie")
+	 * @param gameMap The current gameMap
+	 * @param x_coord The x-coordinate that MamboMarie spawns at
+	 * @param y_coord The y-coordinate tht MamboMarie spawns at
+	 */
 	public MamboMarie(String name, GameMap gameMap, int x_coord, int y_coord) {
 		super(name, gameMap.at(x_coord, y_coord).getGround().getDisplayChar(), 20, ZombieCapability.UNSEEN);
 		this.x_coord = x_coord;
 		this.y_coord = y_coord;
 	}
 
+	/**
+	 * Explanation of playTurn.
+	 * Mambo would be spawned onto the gameMap but would be camouflaged into the ground. Every turn, on 5% chance, if it doesn't reveal itself, it would perform
+	 * MamboHidingAction which consists of several dialogues that we've implemented. 
+	 * If it reveals itself, it would return MamboRevealAction which returns a unique dialogue of MamboMarie revealing herself.
+	 * Once she is revealed, every 10th turn except the 30th, it would return a ChantAction which creates 5 new zombies.
+	 * Else it would wander around the map
+	 * Finally, on the 30th turn it would relocate to a random edge along the map and camouflaged itself, returning a new dialogue in MamboRelocateAction
+	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		if (this.displayChar == map.at(this.x_coord, this.y_coord).getGround().getDisplayChar()) { // Mambo is still vanishing on the current ground
 			// Calculate 5% to see if she should un-vanish
-			if (rand.nextInt(100) <= 4) {
+			if (rand.nextInt(100) <= 3) {
 				// Reveal here
 				this.displayChar = 'M';
 				this.removeCapability(ZombieCapability.UNSEEN); // Invulnerable 

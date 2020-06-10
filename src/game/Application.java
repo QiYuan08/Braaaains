@@ -16,8 +16,10 @@ import edu.monash.fit2099.engine.World;
 public class Application {
 
 	public static void main(String[] args) {
-		World world = new World(new Display());
-
+		//World world = new World(new Display());
+		
+		NewWorld world = new NewWorld(new Display());
+		
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Fence(), new Tree());
 		
 		List<String> map = Arrays.asList(
@@ -49,7 +51,7 @@ public class Application {
 		GameMap gameMap = new GameMap(groundFactory, map );
 		world.addGameMap(gameMap);
 		
-		Actor player = new Player("Player", '@', 1000);
+		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, gameMap.at(42, 15));
 		
 	    // Place some random humans
@@ -75,6 +77,10 @@ public class Application {
 			while (gameMap.at(x, y).containsAnActor());
 			gameMap.at(x,  y).addActor(new Farmer(farmer_names, 'F', 100));
 		}
+		
+		// Spawning MamboMarie
+		MamboSpawn mamboSpawner = new MamboSpawn(gameMap);
+		mamboSpawner.spawnMambo();
 		
 		// place a simple weapon
 		gameMap.at(74, 20).addItem(new Plank());

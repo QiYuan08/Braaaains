@@ -7,8 +7,17 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 
+/**
+ * MamboChantAction class, the main action class which is used by MamboMarie to create zombies on random parts of the map.
+ * Called on every 10th turn when MamboMarie is revealed.
+ * @author Fong Zhong Kern
+ *
+ */
 public class MamboChantAction extends Action{
 	
+	/**
+	 * Constructor of MamboChantAction which doesn't need any parameter values as object required are passed in execute
+	 */
 	public MamboChantAction() {
 	}
 

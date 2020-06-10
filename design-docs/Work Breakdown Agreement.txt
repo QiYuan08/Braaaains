@@ -48,6 +48,7 @@ as a Human, but:
   Farmer harvests the food, it is dropped to the ground. If the player harvests the food, it is placed
   in the player’s inventory
 • Food can be eaten by the player, or by damaged humans, to recover some health points
+Assignment 3: MamboMarie implementation, quitting game, player win or lose conditions
 
 I accept this WBA -Fong Zhong Kern
 I accept this WBA - Teh Qi Yuan
