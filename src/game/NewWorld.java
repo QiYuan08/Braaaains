@@ -1,5 +1,8 @@
 package game;
 
+import java.util.Collections;
+import java.util.List;
+
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
@@ -189,6 +192,11 @@ public class NewWorld extends World{
 	 */
 	protected String endZombieMamboMessage() {
 		return "You WIN!";
+	}
+
+	public List<GameMap> getMap() {
+		List<GameMap> maps = this.gameMaps;   
+		return Collections.unmodifiableList(maps);
 	}
 	
 }
