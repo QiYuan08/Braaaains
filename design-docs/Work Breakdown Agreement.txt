@@ -33,6 +33,8 @@ Teh Qi Yuan is responsible for:
   more damage.
 • If the player is holding a Zombie leg, they can craft it into a Zombie mace, which does even more
   damage
+• Making the shotgun and the sniper rifle 
+• Implement player able to travel from map to map
 
 Fong Zhong Kern is responsible for:
 • As everybody knows, if you’re killed by a Zombie, you become a Zombie yourself. After a Human is
