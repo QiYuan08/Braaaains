@@ -17,6 +17,7 @@ public class MamboMarie extends ZombieActor {
 	private Random rand = new Random();
 	private int turn_counter = 0;
 	private int x_coord, y_coord;
+	private MamboSpawn mamboSpawner;
 
 	/**
 	 * Constructor for MamboMarie which takes in 4 parameters
@@ -25,10 +26,11 @@ public class MamboMarie extends ZombieActor {
 	 * @param x_coord The x-coordinate that MamboMarie spawns at
 	 * @param y_coord The y-coordinate tht MamboMarie spawns at
 	 */
-	public MamboMarie(String name, GameMap gameMap, int x_coord, int y_coord) {
+	public MamboMarie(String name, GameMap gameMap, int x_coord, int y_coord, MamboSpawn mamboSpawner) {
 		super(name, gameMap.at(x_coord, y_coord).getGround().getDisplayChar(), 20, ZombieCapability.UNSEEN);
 		this.x_coord = x_coord;
 		this.y_coord = y_coord;
+		this.mamboSpawner = mamboSpawner;
 	}
 
 	/**
@@ -62,8 +64,7 @@ public class MamboMarie extends ZombieActor {
 				this.turn_counter = 0;
 				this.removeCapability(ZombieCapability.UNDEAD);
 				this.addCapability(ZombieCapability.UNSEEN);
-				MamboSpawn mamboSpawner = new MamboSpawn(map);
-				mamboSpawner.moveMambo(this);
+				this.mamboSpawner.moveMambo(this);
 				this.displayChar = map.locationOf(this).getGround().getDisplayChar();
 				return new MamboRelocateAction();
 			}

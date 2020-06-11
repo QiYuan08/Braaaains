@@ -33,7 +33,7 @@ public class MamboSpawn {
 			Location location = this.gameMap.at(x_coord, y_coord);
 			if(!gameMap.isAnActorAt(location)) {
 				// Clear to spawn mambo here
-				this.gameMap.at(x_coord, y_coord).addActor(new MamboMarie("Voodoo Priestess Mambo Marie", this.gameMap, x_coord, y_coord));
+				this.gameMap.at(x_coord, y_coord).addActor(new MamboMarie("Voodoo Priestess Mambo Marie", this.gameMap, x_coord, y_coord, this));
 				mambo_spawned = true;
 			}
 		}
