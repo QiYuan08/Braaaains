@@ -42,7 +42,7 @@ public class MamboMarie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		if (this.displayChar == map.at(this.x_coord, this.y_coord).getGround().getDisplayChar()) { // Mambo is still vanishing on the current ground
+		if (this.getDisplayChar() == map.at(this.x_coord, this.y_coord).getGround().getDisplayChar()) { // Mambo is still vanishing on the current ground
 			// Calculate 5% to see if she should un-vanish
 			if (rand.nextInt(100) <= 3) {
 				// Reveal here
