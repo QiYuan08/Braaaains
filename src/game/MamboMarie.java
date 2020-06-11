@@ -16,7 +16,6 @@ public class MamboMarie extends ZombieActor {
 	private Behaviour behaviour = new WanderBehaviour();
 	private Random rand = new Random();
 	private int turn_counter = 0;
-	private int x_coord, y_coord;
 	private MamboSpawn mamboSpawner;
 
 	/**
@@ -24,12 +23,11 @@ public class MamboMarie extends ZombieActor {
 	 * @param name: The name of MamboMarie character, defaulted as ("Voodoo Priestess Mambo Marie")
 	 * @param gameMap The current gameMap
 	 * @param x_coord The x-coordinate that MamboMarie spawns at
-	 * @param y_coord The y-coordinate tht MamboMarie spawns at
+	 * @param y_coord The y-coordinate that MamboMarie spawns at
+	 * @param mamboSpawner The utility class that is used to relocate MamboMarie
 	 */
 	public MamboMarie(String name, GameMap gameMap, int x_coord, int y_coord, MamboSpawn mamboSpawner) {
 		super(name, gameMap.at(x_coord, y_coord).getGround().getDisplayChar(), 20, ZombieCapability.UNSEEN);
-		this.x_coord = x_coord;
-		this.y_coord = y_coord;
 		this.mamboSpawner = mamboSpawner;
 	}
 
@@ -44,7 +42,7 @@ public class MamboMarie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		if (this.getDisplayChar() == map.at(this.x_coord, this.y_coord).getGround().getDisplayChar()) { // Mambo is still vanishing on the current ground
+		if (this.getDisplayChar() == map.locationOf(this).getGround().getDisplayChar()) { // Mambo is still vanishing on the current ground
 			// Calculate 5% to see if she should un-vanish
 			if (rand.nextInt(100) <= 4) {
 				// Reveal here
