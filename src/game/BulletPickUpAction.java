@@ -31,7 +31,6 @@ public class BulletPickUpAction extends PickUpItemAction {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		
-		Class cls = this.item.getClass();
 		boolean added = false;
 		
 		map.locationOf(actor).removeItem(item);

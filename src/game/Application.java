@@ -3,11 +3,9 @@ package game;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.World;
 
 /**
  * The main class for the zombie apocalypse game.

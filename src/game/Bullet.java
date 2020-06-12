@@ -1,9 +1,4 @@
-/**
- * 
- */
 package game;
-
-import edu.monash.fit2099.engine.PickUpItemAction;
 
 /**
  * @author Teh Qi Yuan

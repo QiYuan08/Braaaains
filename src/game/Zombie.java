@@ -9,7 +9,6 @@ import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 import edu.monash.fit2099.engine.MoveActorAction;
-import edu.monash.fit2099.engine.PickUpItemAction;
 
 /**
  * A class to create a zombie in the game.

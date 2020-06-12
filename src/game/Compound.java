@@ -22,7 +22,7 @@ public class Compound extends Level{
 	@Override
 	public void loadLevel() {
 		
-		Actor player = new Player("Player", '@', 100);
+		Actor player = new Player("Player", '@', 1000);
 		world.addPlayer(player, gameMap.at(42, 15));
 		
 	    // Place some random humans

@@ -23,7 +23,7 @@ public class Human extends ZombieActor {
 	 * @param name the human's display name
 	 */
 	public Human(String name) {
-		super(name, 'H', 50, ZombieCapability.ALIVE);
+		super(name, 'H', 100, ZombieCapability.ALIVE);
 	}
 	
 	/**
